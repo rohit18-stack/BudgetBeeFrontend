@@ -1,22 +1,13 @@
 <div class="nav">
-    <h2 style="font-family: 'Times New Roman', Times, serif; font-style: italic;">
-        Budget Bee
-    </h2>
-</div>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu" class="toggle-button-row" style="border-radius:0;">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h2 style="font-family: 'Times New Roman', Times, serif; font-style: italic;">
+    Budget Bee
+  </h2>
 
-<div>
-    <div class="toggle-button-row" (click)="toggleSlideOut()">
-      <mat-icon>menu</mat-icon>
-    </div>
-</div>
-
-
-<div class="slide-out-panel" [class.slide-out]="isSlideOut">
-    <div class="slide-out-content">
-      <p class="edit-col" (click)="onDash()">Dashboard</p>
-      <p class="edit-col" (click)="onProfile()">Profile</p>
-      <p class="edit-col" (click)="onNeed()">Need</p>
-      <p class="edit-col" (click)="onLogout()">Log Out</p>
-    </div>
-  </div>
-  
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onDash()" style="font-family: 'Times New Roman', Times, serif; font-style: italic;">Dashboard</button>
+  <button mat-menu-item (click)="onProfile()"style="font-family: 'Times New Roman', Times, serif; font-style: italic;">Profile</button>
+  <button mat-menu-item (click)="onLogout()"style="font-family: 'Times New Roman', Times, serif; font-style: italic;">Log Out</button>
+</mat-menu>

@@ -1,32 +1,29 @@
+
+
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-nav',
+  selector: 'nav',
   standalone: true,
-  imports: [MatIconModule],
   templateUrl: './nav.component.html',
-  styleUrl: './nav.component.scss'
+  styleUrls: ['./nav.component.scss'],
+  imports: [MatIconModule, MatMenuModule] 
 })
-
 export class NavComponent {
-  isSlideOut = true;
-  constructor(private router: Router){}
+  constructor(private router: Router) {}
 
-  toggleSlideOut(): void {
-    this.isSlideOut = !this.isSlideOut;
-  }
-  onDash(){
+  onDash() {
     this.router.navigate(['/budget-planner/dashboard']);
   }
-  onProfile(){
+
+  onProfile() {
     this.router.navigate(['/budget-planner/profile']);
   }
-  onNeed()
-  { 
-    this.router.navigate(['/budget-planner/need']);
-  }
-  onLogout(){
+
+  onLogout() {
     this.router.navigate(['/budget-planner/login']);
   }
 }

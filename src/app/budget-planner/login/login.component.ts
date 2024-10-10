@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -20,7 +21,8 @@ activeForm: 'login' | 'register' = 'login';
 
 constructor( private fb: FormBuilder,
   private router: Router,
-  private snackBar: MatSnackBar){}
+  private snackBar: MatSnackBar,
+ ){}
 ngOnInit() {
   this.loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -51,6 +53,8 @@ register() {
     console.log("Register info==>>", this.registerForm.value);
     setTimeout(() => {
       window.location.reload();
+
+      
     }, 2000);
     this.router.navigate(['/budget-palnner/login']);
   } else {
@@ -60,3 +64,4 @@ register() {
 
 
 }
+
