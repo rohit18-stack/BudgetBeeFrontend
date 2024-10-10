@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,6 +16,7 @@ export class LoginComponent {
 loginForm:any;
 registerForm:any;
 activeForm: 'login' | 'register' = 'login';
+
 
 constructor( private fb: FormBuilder,
   private router: Router,
@@ -39,7 +41,7 @@ toggleForm(form: 'login' | 'register') {
 login() {
   if (this.loginForm.valid) {
     console.log("Login info==>", this.loginForm.value);
-    this.router.navigate(['/budget-planner/dashboard']);
+    this.router.navigate(['/budget-planner/nav']);
   } else {
     this.snackBar.open('Invalid email or password', 'Close', { duration: 3000 });
   }
@@ -50,7 +52,7 @@ register() {
     setTimeout(() => {
       window.location.reload();
     }, 2000);
-    this.router.navigate(['/budget-planner/login']);
+    this.router.navigate(['/budget-palnner/login']);
   } else {
     this.snackBar.open('Fill all fields', 'Close', { duration: 3000 });
   }
