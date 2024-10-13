@@ -1,0 +1,41 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SideNavComponent } from '../side-nav/side-nav.component';
+
+@Component({
+  selector: 'app-profile',
+  standalone: true,
+  imports: [ReactiveFormsModule,CommonModule,SideNavComponent],
+  templateUrl: './profile.component.html',
+  styleUrl: './profile.component.scss'
+})
+export class ProfileComponent {
+profileForm:any;
+
+constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {}
+
+ngOnInit(): void {
+  this.profileForm = this.fb.group({
+    name: ['', Validators.required],
+    dob: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+  });
+}
+
+onSubmit() {
+  if (this.profileForm.valid) {
+    console.log("saved",this.profileForm.value);
+  } else {
+    this.openSnackBar('Fill all fields', 'Close');
+  }
+}
+
+openSnackBar(message: string, action: string) {
+  this.snackBar.open(message, action, {
+    duration: 3000
+  });
+}
+
+}
