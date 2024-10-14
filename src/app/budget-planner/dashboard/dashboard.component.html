@@ -22,7 +22,7 @@
       <tr mat-header-row *matHeaderRowDef="['category', 'amount', 'date']"></tr>
       <tr mat-row *matRowDef="let row; columns: ['category', 'amount', 'date'];"></tr>
     </table>
-    <button mat-button (click)="onExpense()">Add Expense</button>
+    <button id="add-expense" mat-button (click)="onExpense()">Add Expense</button>
   </div>
 
   <div class="card-container">
