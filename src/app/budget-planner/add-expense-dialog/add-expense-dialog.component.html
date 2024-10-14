@@ -1,6 +1,7 @@
 <!-- <p>add-expense-dialog works!</p> -->
 
-<h2>Add Expense</h2>
+<div class="box-container">
+  <h2>Add Expense</h2>
 <form id="big-box" [formGroup]="expenseForm" (ngSubmit)="addExpense()">
   <div>
     <label>Category:</label>
@@ -17,4 +18,5 @@
   <button type="submit" [disabled]="expenseForm.invalid">Add</button>
   <button type="button" (click)="closeDialog()">Cancel</button>
 </form>
+</div>
 

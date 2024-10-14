@@ -81,11 +81,6 @@ export class DashboardComponent implements OnInit {
     // This method is no longer needed since we are handling the form directly in the template
   }
 
-  // onExpense() {
-  //   this.selectedSection = null;
-  //   this.router.navigate(['/budget-planner/expense']);
-  // }
-
   // Adding functionality to the "Add Expense" button...
   onExpense() {
     const dialogRef = this.dialog.open(AddExpenseDialogComponent);

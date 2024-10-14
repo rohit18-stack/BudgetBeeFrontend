@@ -38,7 +38,8 @@ export class AddExpenseDialogComponent {
 
   addExpense() {
     if (this.expenseForm.valid) {
-      this.dialogRef.close(this.expenseForm.value);
+      const newExpense = this.expenseForm.value;
+      this.dialogRef.close(newExpense); // Close with new expense data
     }
   }
 
