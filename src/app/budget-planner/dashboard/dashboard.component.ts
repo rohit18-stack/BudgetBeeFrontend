@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { catchError, forkJoin, Observable, of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
+import { SidenavComponent } from "../sidenav/sidenav.component";
 
 interface Income {
   id: number;
@@ -30,7 +31,7 @@ interface Savings {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatIconModule, SideNavComponent, CommonModule, MatTableModule, HttpClientModule],
+  imports: [MatIconModule, SideNavComponent, CommonModule, MatTableModule, HttpClientModule, SidenavComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [],

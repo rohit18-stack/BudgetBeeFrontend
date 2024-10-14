@@ -40,7 +40,7 @@
 <div class="container">
   <div class="card-container">
 
-    <div class="card">
+    <!-- <div class="card">
       <h2>Income</h2>
       <h3>Total income: {{totalIncome}}</h3>
       <table mat-table [dataSource]="(income$)" class="mat-elevation-z8">
@@ -63,7 +63,7 @@
         <tr mat-row *matRowDef="let row; columns: ['source', 'amount', 'date'];"></tr>
       </table>
       <button mat-button (click)="onIncome()">Edit</button>
-    </div>
+    </div> -->
 
     <div class="card">
       <h2>Expense</h2>
@@ -90,7 +90,7 @@
       <button mat-button (click)="onExpense()">Edit</button>
     </div>
 
-    <div class="card">
+    <div class="card" id="savings-card">
       <h2>Savings</h2>
       <div>
         <strong>Total Savings:</strong> {{ totalSavings }}
@@ -100,4 +100,5 @@
 
   </div>
 </div>
+<app-sidenav></app-sidenav>
 
