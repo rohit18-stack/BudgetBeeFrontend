@@ -1,0 +1,85 @@
+// add-expense-dialog.component.scss
+
+.box-container {
+    max-width: 400px;  // Set a max width for the dialog
+    margin: 0 auto;    // Center the dialog
+    padding: 20px;     // Padding around the content
+    border-radius: 8px; // Rounded corners
+    background-color: #f9f9f9; // Light background color
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+  
+    h2 {
+      text-align: center; // Center the heading
+      color: #333;        // Dark color for the heading
+      margin-bottom: 20px; // Space below the heading
+    }
+  
+    form {
+      display: flex;              // Flexbox for layout
+      flex-direction: column;     // Column layout for inputs
+      gap: 15px;                  // Space between form elements
+  
+      div {
+        display: flex;
+        flex-direction: column;    // Stack label and input
+  
+        label {
+          font-weight: bold;        // Bold label
+          margin-bottom: 5px;      // Space below label
+          color: #555;              // Darker color for the label
+        }
+  
+        input {
+          padding: 10px;           // Padding for input fields
+          border: 1px solid #ccc;  // Light gray border
+          border-radius: 4px;      // Rounded corners
+          font-size: 16px;         // Font size for inputs
+  
+          &:focus {
+            border-color: #007bff; // Change border color on focus
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); // Add shadow on focus
+            outline: none;          // Remove default outline
+          }
+  
+          &::placeholder {
+            color: #aaa;            // Placeholder text color
+          }
+        }
+      }
+  
+      button {
+        padding: 10px;            // Padding for buttons
+        border: none;              // Remove border
+        border-radius: 4px;       // Rounded corners
+        font-size: 16px;           // Font size for buttons
+        cursor: pointer;           // Pointer cursor on hover
+        transition: background-color 0.3s ease; // Smooth background transition
+  
+        &.mat-button {
+          background-color: #007bff; // Primary button color
+          color: white;               // Text color for button
+          margin-top: 10px;          // Space above the button
+  
+          &:disabled {
+            background-color: #ccc;   // Disabled button color
+            cursor: not-allowed;       // Not-allowed cursor for disabled
+          }
+  
+          &:hover:not(:disabled) {
+            background-color: #0056b3; // Darker blue on hover
+          }
+        }
+  
+        &:last-child {
+          background-color: transparent; // Transparent for the cancel button
+          color: #777;                   // Color for cancel button
+          margin-top: 10px;             // Space above the cancel button
+  
+          &:hover {
+            text-decoration: underline;  // Underline on hover
+          }
+        }
+      }
+    }
+  }
+  

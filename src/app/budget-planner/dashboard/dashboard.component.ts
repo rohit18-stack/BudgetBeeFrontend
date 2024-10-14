@@ -29,6 +29,9 @@ interface Expense {
   category: string;
   amount: number;
   date: string;
+  description: '',
+  modeOfPayment: '',
+  subcategory: '',
 }
 
 @Component({
@@ -77,9 +80,9 @@ export class DashboardComponent implements OnInit {
     this.loadData();
   }
 
-  onIncome() {
-    // This method is no longer needed since we are handling the form directly in the template
-  }
+  // onIncome() {
+  //   // This method is no longer needed since we are handling the form directly in the template
+  // }
 
   // Adding functionality to the "Add Expense" button...
   onExpense() {
@@ -128,8 +131,6 @@ export class DashboardComponent implements OnInit {
     const newIncomeEntry: Income = {
       amount: this.newIncome.amount!,
       id: 0,
-      // source: this.newIncome.source,
-      // date: this.newIncome.date
       source: this.newIncome.source || '',  // Provide a default empty string
       date: this.newIncome.date || ''       // Similarly for date if needed
     };
