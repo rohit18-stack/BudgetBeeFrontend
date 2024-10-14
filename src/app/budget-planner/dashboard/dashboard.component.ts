@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { AddExpenseDialogComponent } from '../add-expense-dialog/add-expense-dialog.component';
 
 interface Income {
   id: number;
@@ -62,10 +64,13 @@ export class DashboardComponent implements OnInit {
 
   newIncome: Income = { amount: 0, id: 0, source: '', date: '' };
 
+  expenses: any[] = []; // Array to hold expenses
+
   constructor(
     public router: Router,
     private http: HttpClient,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -76,9 +81,25 @@ export class DashboardComponent implements OnInit {
     // This method is no longer needed since we are handling the form directly in the template
   }
 
+  // onExpense() {
+  //   this.selectedSection = null;
+  //   this.router.navigate(['/budget-planner/expense']);
+  // }
+
+  // Adding functionality to the "Add Expense" button...
   onExpense() {
-    this.selectedSection = null;
-    this.router.navigate(['/budget-planner/expense']);
+    const dialogRef = this.dialog.open(AddExpenseDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.addExpense(result); // Add expense if result is not null
+      }
+    });
+  }
+
+  // Viewing of the 
+  addExpense(expense: any) {
+    this.expenses.push(expense); // Add new expense to the array
   }
 
   onSavings() {
