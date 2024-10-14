@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Income {
   id: number;
@@ -57,11 +58,14 @@ export class DashboardComponent implements OnInit {
   totalIncome = 0;
   totalExpenses = 0;
   totalSavings = 0;
-  newIncome: Partial<Income> = { amount: 0 };
+  // newIncome: Partial<Income> = { amount: 0 };
+
+  newIncome: Income = { amount: 0, id: 0, source: '', date: '' };
 
   constructor(
     public router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -99,22 +103,33 @@ export class DashboardComponent implements OnInit {
   }
 
   addIncome() {
+    // Check if the amount is negative
+    if (this.newIncome.amount <= 0) {
+      this.snackbar.open('Enter positive value', 'Close', { duration: 3000 });
+      return; // Exit the function if the value is negative or zero
+    }
+  
     const newIncomeEntry: Income = {
       amount: this.newIncome.amount!,
       id: 0,
-      source: '',
-      date: ''
+      // source: this.newIncome.source,
+      // date: this.newIncome.date
+      source: this.newIncome.source || '',  // Provide a default empty string
+      date: this.newIncome.date || ''       // Similarly for date if needed
     };
-
-    this.http.post<Income>('http://localhost:3000/income', newIncomeEntry).subscribe(newIncome => {
-      this.income$.subscribe(incomes => {
-        this.income$ = of([...incomes, newIncome]);
-        this.calculateTotals();
-      });
+  
+    this.http.post<Income>('http://localhost:3000/income', newIncomeEntry).subscribe({
+      next: (newIncome) => {
+        this.income$.subscribe(incomes => {
+          this.income$ = of([...incomes, newIncome]);
+          this.calculateTotals();
+        });
+      },
+      error: (error) => {
+        console.error('Error adding income:', error);
+        this.snackbar.open('Failed to add income. Please try again.', 'Close', { duration: 3000 });
+      }
     });
-
-    // Reset the form
-    this.newIncome.amount = 0;
   }
 
   calculateTotals() {
