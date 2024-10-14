@@ -1,28 +1,28 @@
-$sidenav-width: 200px;
-$sidenav-bg-color: #3498db;
-$sidenav-text-color: white;
+// $sidenav-width: 200px;
+// $sidenav-bg-color: #3498db;
+// $sidenav-text-color: white;
 
-.sidenav {
-  width: $sidenav-width;
-  background-color: $sidenav-bg-color;
-  height: 100vh; // Full height of the viewport
-  padding: 20px;
-  position: absolute;
-  top: 10%;
-  right: 0%;
+// .sidenav {
+//   width: $sidenav-width;
+//   background-color: $sidenav-bg-color;
+//   height: 100vh; // Full height of the viewport
+//   padding: 20px;
+//   position: absolute;
+//   top: 10%;
+//   right: 0%;
   
-  ul {
-    list-style: none;
-    padding: 0;
+//   ul {
+//     list-style: none;
+//     padding: 0;
 
-    li {
-      margin: 15px 0;
-      cursor: pointer;
-      transition: background-color 0.3s;
+//     li {
+//       margin: 15px 0;
+//       cursor: pointer;
+//       transition: background-color 0.3s;
 
-      &:hover {
-        background-color: darken($sidenav-bg-color, 10%);
-      }
-    }
-  }
-}
+//       &:hover {
+//         background-color: darken($sidenav-bg-color, 10%);
+//       }
+//     }
+//   }
+// }

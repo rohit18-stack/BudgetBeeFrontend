@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTableModule} from "@angular/material/table"
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 // import { SidenavComponent } from './budget-planner/sidenav/sidenav.component';
 
 
