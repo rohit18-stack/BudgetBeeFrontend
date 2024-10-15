@@ -331,109 +331,109 @@
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 2,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 100,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 100,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 100,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 1,
       "source": "",
       "date": ""
     },
     {
-      "id": 0,
+      "id": "0",
       "amount": 1,
       "source": "",
       "date": ""
@@ -499,6 +499,36 @@
       "category": "Miscellaneous",
       "amount": 200,
       "date": "2023-10-21"
+    },
+    {
+      "id": "bf77",
+      "category": "rohit",
+      "amount": 2000,
+      "date": "2024-10-14"
+    },
+    {
+      "id": "8287",
+      "category": "Grooming",
+      "amount": 8000,
+      "date": "2024-10-21"
+    },
+    {
+      "id": "53b2",
+      "description": "boost",
+      "category": "wants",
+      "subcategory": "Boost",
+      "amount": 900,
+      "modeOfPayment": "cash",
+      "date": "2024-10-14"
+    },
+    {
+      "id": "58b4",
+      "description": "Item",
+      "category": "Wants",
+      "subcategory": "Rent",
+      "amount": 9000,
+      "modeOfPayment": "cash",
+      "date": "2024-10-14"
     }
   ],
   "savings": [

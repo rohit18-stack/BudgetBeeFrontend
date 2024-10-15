@@ -16,24 +16,25 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { AddExpenseDialogComponent } from '../add-expense-dialog/add-expense-dialog.component';
-
+ 
 interface Income {
   id: number;
   source: string;
   amount: number;
   date: string;
 }
-
+ 
 interface Expense {
   id: number;
-  category: string;
+  description: string;
   amount: number;
+  modeOfPayment: string;
+  subcategory: string;
+  category: string;
   date: string;
-  description: '',
-  modeOfPayment: '',
-  subcategory: '',
 }
-
+ 
+ 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -64,77 +65,97 @@ export class DashboardComponent implements OnInit {
   totalExpenses = 0;
   totalSavings = 0;
   // newIncome: Partial<Income> = { amount: 0 };
-
+ 
   newIncome: Income = { amount: 0, id: 0, source: '', date: '' };
-
+ 
   expenses: any[] = []; // Array to hold expenses
-
+ 
   constructor(
     public router: Router,
     private http: HttpClient,
     private snackbar: MatSnackBar,
     private dialog: MatDialog
   ) {}
-
+ 
   ngOnInit() {
     this.loadData();
   }
-
-  // onIncome() {
-  //   // This method is no longer needed since we are handling the form directly in the template
+ 
+  onIncome() {
+    // This method is no longer needed since we are handling the form directly in the template
+  }
+ 
+  // onExpense() {
+  //   this.selectedSection = null;
+  //   this.router.navigate(['/budget-planner/expense']);
   // }
-
+ 
   // Adding functionality to the "Add Expense" button...
   onExpense() {
     const dialogRef = this.dialog.open(AddExpenseDialogComponent);
-
+ 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.addExpense(result); // Add expense if result is not null
       }
     });
   }
-
-  // Viewing of the 
-  addExpense(expense: any) {
-    this.expenses.push(expense); // Add new expense to the array
+ 
+  // Viewing of the
+  addExpense(expense: Expense) {
+    this.http.post<Expense>('http://localhost:3000/expense', expense).subscribe({
+      next: (newExpense) => {
+        this.expense$.subscribe(expenses => {
+          this.expense$ = of([...expenses, newExpense]);
+          this.calculateTotals();
+        });
+        this.snackbar.open('Expense added successfully', 'Close', { duration: 3000 });
+      },
+      error: (error) => {
+        console.error('Error adding expense:', error);
+        this.snackbar.open('Failed to add expense. Please try again.', 'Close', { duration: 3000 });
+      }
+    });
   }
-
+ 
+ 
   onSavings() {
     this.selectedSection = 'savings';
     this.router.navigate(['/budget-planner/savings']);
   }
-
+ 
   loadData() {
     this.income$ = this.http.get<Income[]>('http://localhost:3000/income').pipe(
       catchError(() => of([]))
     );
-
+ 
     this.expense$ = this.http.get<Expense[]>('http://localhost:3000/expense').pipe(
       catchError(() => of([]))
     );
-
+ 
     forkJoin([this.income$, this.expense$]).subscribe(([incomes, expenses]) => {
       this.totalIncome = incomes.reduce((acc, curr) => acc + curr.amount, 0);
       this.totalExpenses = expenses.reduce((acc, curr) => acc + curr.amount, 0);
       this.totalSavings = this.totalIncome - this.totalExpenses;
     });
   }
-
+ 
   addIncome() {
     // Check if the amount is negative
     if (this.newIncome.amount <= 0) {
       this.snackbar.open('Enter positive value', 'Close', { duration: 3000 });
       return; // Exit the function if the value is negative or zero
     }
-  
+ 
     const newIncomeEntry: Income = {
       amount: this.newIncome.amount!,
       id: 0,
+      // source: this.newIncome.source,
+      // date: this.newIncome.date
       source: this.newIncome.source || '',  // Provide a default empty string
       date: this.newIncome.date || ''       // Similarly for date if needed
     };
-  
+ 
     this.http.post<Income>('http://localhost:3000/income', newIncomeEntry).subscribe({
       next: (newIncome) => {
         this.income$.subscribe(incomes => {
@@ -148,18 +169,23 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
+ 
   calculateTotals() {
     this.income$.subscribe(incomes => {
       this.totalIncome = incomes.reduce((acc, curr) => acc + curr.amount, 0);
+    });
+ 
+    this.expense$.subscribe(expenses => {
+      this.totalExpenses = expenses.reduce((acc, curr) => acc + curr.amount, 0);
       this.totalSavings = this.totalIncome - this.totalExpenses;
     });
   }
-
+ 
+ 
   get incomeData() {
     return this.income$ || of([]);
   }
-
+ 
   get expenseData() {
     return this.expense$ || of([]);
   }
