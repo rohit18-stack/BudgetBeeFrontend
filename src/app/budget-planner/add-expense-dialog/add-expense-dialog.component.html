@@ -1,20 +1,33 @@
-<!-- <p>add-expense-dialog works!</p> -->
-
-<h2>Add Expense</h2>
-<form id="big-box" [formGroup]="expenseForm" (ngSubmit)="addExpense()">
-  <div>
-    <label>Category:</label>
-    <input formControlName="category" placeholder="Enter category" />
+<div id="popup-container">
+  <div id="big-box">
+    <h2>Add Expense</h2>
+    <form [formGroup]="expenseForm" (ngSubmit)="addExpense()">
+      <div class="form-group">
+        <label>Description:</label>
+        <input formControlName="description" placeholder="Enter description" />
+      </div>
+      <div class="form-group">
+        <label>Category:</label>
+        <input formControlName="category" placeholder="Enter category" />
+      </div>
+      <div class="form-group">
+        <label>Subcategory:</label>
+        <input formControlName="subcategory" placeholder="Enter subcategory" />
+      </div>
+      <div class="form-group">
+        <label>Amount:</label>
+        <input type="number" formControlName="amount" placeholder="Enter amount" />
+      </div>
+      <div class="form-group">
+        <label>Mode of Payment:</label>
+        <input formControlName="modeOfPayment" placeholder="Enter mode of payment" />
+      </div>
+      <div class="form-group">
+        <label>Date:</label>
+        <input type="date" formControlName="date" />
+      </div>
+      <button type="submit" [disabled]="expenseForm.invalid">Add</button>
+      <button type="button" (click)="closeDialog()">Cancel</button>
+    </form>
   </div>
-  <div>
-    <label>Amount:</label>
-    <input type="number" formControlName="amount" placeholder="Enter amount" />
-  </div>
-  <div>
-    <label>Date:</label>
-    <input type="date" formControlName="date" />
-  </div>
-  <button type="submit" [disabled]="expenseForm.invalid">Add</button>
-  <button type="button" (click)="closeDialog()">Cancel</button>
-</form>
-
+</div>

@@ -4,47 +4,107 @@
     <h2>Expense</h2>
     <h3>Total Expense: {{ totalExpenses }}</h3>
     <table mat-table [dataSource]="expenseData" class="mat-elevation-z8">
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef> Category </th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>S.No</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
       </ng-container>
 
       <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> Amount </th>
-        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      <ng-container matColumnDef="modeOfPayment">
+        <th mat-header-cell *matHeaderCellDef>Mode of Payment</th>
+        <td mat-cell *matCellDef="let element">{{ element.modeOfPayment }}</td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let element">{{ element.category }}</td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="['category', 'amount', 'date']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['category', 'amount', 'date'];"></tr>
+      <ng-container matColumnDef="subcategory">
+        <th mat-header-cell *matHeaderCellDef>Subcategory</th>
+        <td mat-cell *matCellDef="let element">{{ element.subcategory }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button (click)="editExpense(element)" color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-button (click)="deleteExpense(element.id)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="[
+          'date',
+          'amount',
+          'description',
+          'modeOfPayment',
+
+          'category',
+          'subcategory',
+          'actions'
+        ]"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: [
+            'date',
+            'amount',
+            'description',
+            'modeOfPayment',
+
+            'category',
+            'subcategory',
+            'actions'
+          ]
+        "
+      ></tr>
     </table>
-    <button id="add-expense" mat-button (click)="onExpense()">Add Expense</button>
+    <button id="add-expense" mat-button (click)="onExpense()">
+      Add Expense
+    </button>
   </div>
 
   <div class="card-container">
     <div class="in-card">
       <h2>Income</h2>
-      <div>
-        <strong>Total Income:</strong> {{ totalIncome }}
-      </div>
+      <div><strong>Total Income:</strong> {{ totalIncome }}</div>
       <form (ngSubmit)="addIncome()">
         <mat-form-field appearance="fill">
           <mat-label>Amount</mat-label>
-          <input matInput [(ngModel)]="newIncome.amount" name="amount" type="number" required>
+          <input
+            matInput
+            [(ngModel)]="newIncome.amount"
+            name="amount"
+            type="number"
+            required
+          />
         </mat-form-field>
-        <button mat-button type="submit">Add Income</button>
+        <button mat-button type="submit" style="background:linear-gradient(135deg, #0b8000, #9bc759);">Add Income</button>
       </form>
     </div>
 
     <div class="card" id="savings-card">
       <h2>Savings</h2>
-      <div>
-        <strong>Total Savings:</strong> {{ totalSavings }}
-      </div>
+      <div><strong>Total Savings:</strong> {{ totalSavings }}</div>
     </div>
   </div>
 </div>

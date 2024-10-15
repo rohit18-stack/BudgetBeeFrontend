@@ -1,15 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-add-expense-dialog',
-//   standalone: true,
-//   imports: [],
-//   templateUrl: './add-expense-dialog.component.html',
-//   styleUrl: './add-expense-dialog.component.scss'
-// })
-// export class AddExpenseDialogComponent {
-
-// }
 
 
 import { Component } from '@angular/core';
@@ -20,6 +8,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
   standalone: true,
   selector: 'app-add-expense-dialog',
   templateUrl: './add-expense-dialog.component.html',
+  styleUrls: ['./add-expense-dialog.component.scss'],
   imports:[ReactiveFormsModule]
 })
 export class AddExpenseDialogComponent {
@@ -30,9 +19,12 @@ export class AddExpenseDialogComponent {
     private fb: FormBuilder
   ) {
     this.expenseForm = this.fb.group({
+      description: ['', Validators.required],
       category: ['', Validators.required],
-      amount: ['', [Validators.required, Validators.min(0)]],
-      date: ['', Validators.required],
+      subcategory: ['', Validators.required],
+      amount: [0, [Validators.required, Validators.min(1)]],
+      modeOfPayment: ['', Validators.required],
+      date: ['', Validators.required]
     });
   }
 
