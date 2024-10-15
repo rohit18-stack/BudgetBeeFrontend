@@ -117,7 +117,49 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  editExpense(expense: Expense) {
+    const dialogRef = this.dialog.open(AddExpenseDialogComponent, {
+      data: expense
+    });
  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateExpense(result);
+      }
+    });
+  }
+ 
+  updateExpense(expense: Expense) {
+    this.http.put<Expense>(`http://localhost:3000/expense/${expense.id}`, expense).subscribe({
+      next: (updatedExpense) => {
+        this.expense$.subscribe(expenses => {
+          const updatedExpenses = expenses.map(e => e.id === updatedExpense.id ? updatedExpense : e);
+          this.expense$ = of(updatedExpenses);
+          this.calculateTotals();
+        });
+        this.snackbar.open('Expense updated successfully', 'Close', { duration: 3000 });
+      },
+      error: (error) => {
+        console.error('Error updating expense:', error);
+        this.snackbar.open('Failed to update expense. Please try again.', 'Close', { duration: 3000 });
+      }
+    });
+  }
+  deleteExpense(id: number) {
+    this.http.delete(`http://localhost:3000/expense/${id}`).subscribe({
+      next: () => {
+        this.expense$.subscribe(expenses => {
+          this.expense$ = of(expenses.filter(e => e.id !== id));
+          this.calculateTotals();
+        });
+        this.snackbar.open('Expense deleted successfully', 'Close', { duration: 3000 });
+      },
+      error: (error) => {
+        console.error('Error deleting expense:', error);
+        this.snackbar.open('Failed to delete expense. Please try again.', 'Close', { duration: 3000 });
+      }
+    });
+  }
  
   onSavings() {
     this.selectedSection = 'savings';
@@ -190,3 +232,4 @@ export class DashboardComponent implements OnInit {
     return this.expense$ || of([]);
   }
 }
+ 

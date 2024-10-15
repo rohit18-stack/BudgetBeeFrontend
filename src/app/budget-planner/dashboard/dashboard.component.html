@@ -1,45 +1,53 @@
 <app-side-nav></app-side-nav>
- <div class="container">
+<div class="container">
   <div class="ex-card">
     <h2>Expense</h2>
     <h3>Total Expense: {{ totalExpenses }}</h3>
     <table mat-table [dataSource]="expenseData" class="mat-elevation-z8">
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef> Sub-Category </th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> Amount </th>
-        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-      </ng-container>
-
       <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef> Description </th>
         <td mat-cell *matCellDef="let element"> {{element.description}} </td>
       </ng-container>
-
+ 
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+      </ng-container>
+ 
       <ng-container matColumnDef="modeOfPayment">
         <th mat-header-cell *matHeaderCellDef> Mode of Payment </th>
         <td mat-cell *matCellDef="let element"> {{element.modeOfPayment}} </td>
       </ng-container>
-
+ 
       <ng-container matColumnDef="subcategory">
-        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <th mat-header-cell *matHeaderCellDef> Subcategory </th>
         <td mat-cell *matCellDef="let element"> {{element.subcategory}} </td>
       </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="['category', 'amount', 'date', 'description', 'modeOfPayment', 'subcategory']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['category', 'amount', 'date', 'description', 'modeOfPayment', 'subcategory'];"></tr>
+ 
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+      </ng-container>
+ 
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+ 
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button (click)="editExpense(element)">Edit</button>
+          <button mat-button (click)="deleteExpense(element.id)">Delete</button>
+        </td>
+      </ng-container>
+ 
+      <tr mat-header-row *matHeaderRowDef="['description', 'amount', 'modeOfPayment', 'subcategory', 'category', 'date', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['description', 'amount', 'modeOfPayment', 'subcategory', 'category', 'date', 'actions'];"></tr>
     </table>
     <button id="add-expense" mat-button (click)="onExpense()">Add Expense</button>
   </div>
-
+ 
   <div class="card-container">
     <div class="in-card">
       <h2>Income</h2>
@@ -54,7 +62,7 @@
         <button mat-button type="submit">Add Income</button>
       </form>
     </div>
-
+ 
     <div class="card" id="savings-card">
       <h2>Savings</h2>
       <div>
@@ -63,4 +71,5 @@
     </div>
   </div>
 </div>
-
+ 
+<app-sidenav></app-sidenav>
